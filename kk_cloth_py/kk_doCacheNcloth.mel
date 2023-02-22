@@ -1,0 +1,16 @@
+//// Kitt Khosla
+//// Batch script runs cmdline in a shot, and requires the "path/file.mb" and the "path/doCacheNcloth.mel" script.
+////  mayabatch -prompt -batch -file "/path/to/scene.mb" -script "/path/to/myscript.mel"
+
+string $outputdir = "C:\Users\kkhosla\Documents\maya\projects\default\cache\nCache";
+string $clothCages[] = {"lWing_outerGeo", "lWing_innerGeo", "rWing_innerGeo"};
+string $clothArgs[] = { "2", "1", "10", "OneFile", "1", "", "0", "", "0", "add", "0", "1", "1", "0", "1"};
+int $clothVer = 4;
+
+global proc makeNclothCache(int $version, string $args[], string $cages[]) {
+	select $cages[0] $cages[1] $cages[2];
+	doCreateNclothCache $version $args;
+}
+
+makeNclothCache($clothVer, $clothArgs, $clothCages);
+quit -f;
